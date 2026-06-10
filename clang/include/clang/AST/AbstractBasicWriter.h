@@ -10,6 +10,7 @@
 #define LLVM_CLANG_AST_ABSTRACTBASICWRITER_H
 
 #include "clang/AST/ASTContext.h"
+#include "clang/AST/Attr.h"
 #include "clang/AST/DeclTemplate.h"
 #include <optional>
 

@@ -7860,9 +7860,10 @@ TypeSystemClang::CreateBaseClassSpecifier(lldb::opaque_compiler_type_t type,
     return nullptr;
 
   return std::make_unique<clang::CXXBaseSpecifier>(
-      clang::SourceRange(), is_virtual, base_of_class,
+      clang::SourceRange(), is_virtual,
       TypeSystemClang::ConvertAccessTypeToAccessSpecifier(access),
       getASTContext().getTrivialTypeSourceInfo(GetQualType(type)),
+      nullptr,
       clang::SourceLocation());
 }
 

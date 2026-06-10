@@ -519,6 +519,10 @@ let Class = PropertyTypeCase<APValue, "Reflection"> in {
     let Conditional = [{ kind == ReflectionKind::BaseSpecifier }];
     let Read = [{ baseSpecIdx }];
   }
+  def : Property<"baseAnnotation", Attr> {
+    let Conditional = [{ kind == ReflectionKind::Annotation }];
+    let Read = [{ base.getReflectedAnnotation() }];
+  }
 
   def : Property<"baseTdmsType", QualType> {
     let Conditional = [{ kind == ReflectionKind::DataMemberSpec }];
@@ -585,6 +589,9 @@ let Class = PropertyTypeCase<APValue, "Reflection"> in {
       V = APValue(
             kind,
             (*baseBaseSpecDerivedFrom)->bases().begin() + (*baseBaseSpecIdx));
+      break;
+    case ReflectionKind::Annotation:
+      V = APValue(kind, cast_or_null<CXX26AnnotationAttr>(*baseAnnotation));
       break;
     case ReflectionKind::DataMemberSpec: {
       TagDataMemberSpec *TDMS = new (ctx) TagDataMemberSpec {};
